@@ -23,3 +23,9 @@
 
 ### 문제 3
 `add`, `subtract`, `multiply`, `divide` 함수를 작성하고, 이들을 객체의 메서드로 저장하는 `calculator` 객체를 생성하세요. 그리고 `calculate` 함수를 작성하여 연산자와 두 개의 숫자를 입력받아 `calculator` 객체의 적절한 메서드를 호출하도록 구현하세요.
+
+# 프로그래머스 알고리즘 문제
+
+## [조건에 맞게 수열 변환하기 3](https://school.programmers.co.kr/learn/courses/30/lessons/181835)
+
+## [배열의 길이에 따라 다른 연산하기](https://school.programmers.co.kr/learn/courses/30/lessons/181854)
