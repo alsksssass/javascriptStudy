@@ -1,0 +1,13 @@
+일급객체
+1. 함수의 매개변수로 전달 가능
+2. 함수의 반환 값으로 사용 가능
+3. 변수에 저장 가능
+4. 무명 리터럴로 생성 가능(런타임에 생성 가능)
+
+장점
+함수형 프로그램이 가능하다.
+코드 재사용 & DRY(don't repeat yourself) 원칙
+테스트하기 쉽고 모듈화되기 좋다.
+행동을 추상화할 수 있다 (ex. 고차함수에 다른 함수를 인자로 넣어 데이터에 적용할 행동을 추상화)
+
+https://www.vaia.com/en-us/explanations/computer-science/functional-programming/first-class-functions/#:~:text=and%20efficient%20software.-,Advantages%20of%20Using%20First%20Class%20Functions%20in%20Programming,-First%20world%20programming
