@@ -3,12 +3,13 @@ class Circle {
 		this.radius = radius;
 	}
 
-	area(){
-		return (this.round() /2) * this.radius;
-	}
 	round(){
 		return this.radius * this.radius * Math.PI;
 	}
+}
+
+Circle.prototype.area = function area(){
+	return (this.round() /2) * this.radius;
 }
 
 const circle1 = new Circle(5);
