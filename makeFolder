@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# 현재 폴더에서 chapter_XX 형태의 폴더 찾기
+last_chapter=$(ls -d chapter_* 2>/dev/null | sort -V | tail -n 1)
+
+# 만약 폴더가 없다면 기본값으로 chapter_00 설정
+if [ -z "$last_chapter" ]; then
+    next_number=0
+else
+    # 마지막 폴더 이름에서 숫자 추출
+    last_number=$(echo "$last_chapter" | sed 's/chapter_//')
+    next_number=$((10#$last_number + 1))  # 숫자 부분에 1을 더함
+fi
+
+# 새로운 폴더 이름 생성 (숫자를 2자리로 맞추기)
+new_folder=$(printf "chapter_%02d" "$next_number")
+
+# 새로운 폴더 생성
+mkdir "$new_folder"
+echo "Created folder: $new_folder"
+
+# 서브폴더 생성
+subfolders=("jongmlee" "sabyun" "semjeong" "jimchoi" "somilee")
+for subfolder in "${subfolders[@]}"; do
+    mkdir "$new_folder/$subfolder"
+    echo "Created subfolder: $new_folder/$subfolder"
+done
