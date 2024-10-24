@@ -127,17 +127,3 @@ console.log(calculate("/", 6, 2));
 
 
 
-// console.log("algo - 1");
-// const arr = [1, 2, 3, 4, 5];
-
-// function solution(arr, k) {
-
-//     if (k % 2 === 1)
-//         return (arr.map(i => i *k));
-//     else 
-//         return (arr.map(i => i + k));
-
-// }
-
-// console.log(solution(arr, 2));
-
