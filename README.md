@@ -64,6 +64,17 @@ call, apply, bind 메서드를 사용하여 this 바인딩을 명시적으로 �
 
 이 문제들은 각 장의 핵심 개념을 이해하고 실제로 적용해볼 수 있도록 구성되었습니다. 클로저, 실행 컨텍스트, this 바인딩과 같은 중요한 개념들을 실습을 통해 학습할 수 있습니다.
 
+# 프로그래머스 알고리즘 문제
+
+## [카운트 업](https://school.programmers.co.kr/learn/courses/30/lessons/181920)
+- 클로저와 스코프 개념 연습 가능
+- 배열 생성과 조작 연습
+
+## [수 조작하기 1](https://school.programmers.co.kr/learn/courses/30/lessons/181926)
+- this 바인딩과 메서드 체이닝 연습 가능
+- 문자열과 조건문 처리 연습
+  
+
 ## 21장: 빌트인 객체
 
 ### 문제 1
