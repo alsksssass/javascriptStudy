@@ -33,7 +33,7 @@ function calculate(cal, a, b) {
 
 console.log(calculate('+',1,2));
 console.log(calculate('-',1,2));
-console.log(calculate('*',1,2));
+console.log(calculate('*',1,2:));
 console.log(calculate('/',1,2));
 console.log(calculate('/',1,0));
 console.log(calculate('=',1,0));
