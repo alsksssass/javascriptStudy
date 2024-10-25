@@ -8,4 +8,5 @@ function makeStr(str) {
 	return result;
 }
 
-console.log(makeStr('apple')); // 'Ppl'
+const string = "Hello World! This is a sample string.";
+console.log(makeStr("Hello World! This is a sample string.")); // 'Ppl'
