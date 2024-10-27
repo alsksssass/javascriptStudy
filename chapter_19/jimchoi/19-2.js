@@ -35,6 +35,7 @@ function Animal(name) {
   
   console.log(dog instanceof Dog);
   console.log(dog instanceof Animal);
+  console.log(Labrador instanceof Dog);
   
   console.log(`이름 : ${dog.getName()}
   소리 : ${dog.makeSound()}
