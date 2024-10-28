@@ -1,0 +1,24 @@
+Q. 호이스팅이 실행 컨텍스트와 어떤 관계가 있는지 설명하고, 
+   var, let, const의 호이스팅 차이를 예제를 들어 설명하세요.
+
+- 호이스팅(Hoisting): 실행 컨텍스트가 생성될 때 변수와 함수 선언을 미리 처리하는 과정
+
+<var>
+- var로 선언된 변수는 선언이 최상단으로 끌어올려지지만, 초기화는 선언 이후에 수행
+- 따라서 초기화 이전에 var 변수에 접근하면 undefined
+
+console.log(a); // undefined
+var a = 10;
+console.log(a); // 10
+
+
+<let, const>
+- 선언이 호이스팅되지만, 일시적 사각지대(Temporal Dead Zone, TDZ)가 존재 -> 초기화 전에 사용 불가능
+- 따라서 let이나 const로 선언된 변수에 선언 전에 접근하려고 하면 ReferenceError가 발생
+- const는 선언과 동시에 할당해야 함
+
+console.log(b); // ReferenceError
+let b = 20;
+
+console.log(c); // ReferenceError
+const c = 30;
