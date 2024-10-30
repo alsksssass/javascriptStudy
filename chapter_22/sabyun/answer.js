@@ -30,6 +30,7 @@ function ex (){
 
 // ex();
 
-setTimeout(() => console.log(this.name), 10);
+setTimeout(() => console.log('this settime out',this), 10);
 
 console.log('arrow' , obj.arrow());
+console.log('gloval' , this);

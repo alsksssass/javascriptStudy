@@ -10,6 +10,7 @@ const nbaTeam = {
 	  });
 	},
   
+	
 	showPlayersArrow: function() {
 	  this.players.forEach((player) => {
 		console.log(`${player} plays for ${this.name}`);

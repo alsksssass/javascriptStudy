@@ -9,7 +9,7 @@ const obj = {
     test2();
 
     const test3 = function () {
-      console.log(this.num);
+      console.log(this);
     };
 
     test3(); // ?
@@ -17,6 +17,8 @@ const obj = {
 };
 
 obj.foo();
+
+console.log(num);
 
 /**
  * 중첩 힘수를 일반 힘수로 호출하면 힘수 내부의 this에는 전역 객체가 바인딩된다.

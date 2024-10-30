@@ -18,8 +18,6 @@ const player2 = {
 player1.score.call(player2, 2);
 player1.score.apply(player2, [3]);
 
-const tatumScore = player1.score.bind(player2);
-tatumScore(2);
-tatumScore(3);
+player1.score.bind(player2)(2);
 
 player1.score(3);
