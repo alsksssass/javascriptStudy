@@ -7,7 +7,7 @@ const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // 원본배열의인덱스1부터2개의요소를제거하고그자리에새로운요소2@, 3@을삽입한다 
 const SpliceFunc = (arr, idx, ...rest) => {
 	function add (){
-		arr.Splice(idx, 0, ...rest);
+		console.log(arr.Splice(idx, 0, ...rest));
 	}
 	function cut (num){
 		arr.Splice(idx, num, ...rest);
@@ -25,4 +25,5 @@ const concatFunc = (arr1, arr2) => {
 	return arr1.concat(arr2);
 }
 
+SpliceFunc(arr);
 
