@@ -1,22 +1,22 @@
 class Account {
     constructor(name, amount) {
-        this.name = name;
-        this.amount = amount;
+        this._name = name;
+        this._amount = amount;
     }
     
     deposit(money) {
-        this.amount += money;
+        this._amount += money;
     }
 
     withdraw(money) {
-        if (this.amount < money)
+        if (this._amount < money)
             console.log('No enough money!');
         else
-            this.amount -= money;
+            this._amount -= money;
     }
 
     get amount() {
-        return this.amount;
+        return this._amount;
     }
 }
 
