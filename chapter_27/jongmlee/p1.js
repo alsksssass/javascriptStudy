@@ -16,7 +16,7 @@ class GradeHandler {
 		const highestScores = {};
 
 		subjects.forEach(subject => {
-			highestScores[subject] = Math.max(scores.map(score => score[subject]));
+			highestScores[subject] = Math.max(...scores.map(score => score[subject]));
 		});
 
 		return highestScores;

@@ -1,6 +1,7 @@
 class Vehicle {
   constructor(name) {
     this.name = name;
+    console.log(this.name);
     this.speed = 0;
   }
 
