@@ -4,9 +4,9 @@ function User ({name = 'Unknown', age = 0, ...additionalInfo} = {}) {
 
 User({
     //name: "Somilee",
+    id: 'somilee',
     age: 26,
-    city: 'Seoul',
-    id: 'somilee'
+    city: 'Seoul'
 });
 
 /*
