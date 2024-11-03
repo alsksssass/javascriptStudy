@@ -80,11 +80,7 @@ const pass = (subjects) => {
 // pass(students.map(item => item.scores.))
 
 const score = function (students) {
-  //   const result = students.map(item => {
-  //     sum = Object.values(item.scores).reduce((acc, cur)=> acc+cur, 0);
-  //     average = sum / Object.keys(item.scores).length;
-  //     return {...item, average};
-  // });
+
   const result = students.map((item) => {
     const sum = Object.values(item.scores).reduce((acc, cur) => acc + cur, 0);
     const average = sum / Object.keys(item.scores).length;
@@ -103,7 +99,7 @@ const score = function (students) {
     const subjects = Object.keys(result[0].scores); //["math", "english", "science", "history"]
     const highScores = {};
     subjects.forEach((sub) => {
-      highScores[sub] = highScores[sub] = Math.max(...result.map((student) => student.scores[sub]));
+    highScores[sub] = Math.max(...result.map((student) => student.scores[sub]));
 
     })
     
