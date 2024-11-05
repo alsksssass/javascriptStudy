@@ -1,74 +1,129 @@
 #!/bin/bash
 
-# 챕터별 문제 내용을 담을 배열 생성
-declare -A chapter_contents
+# 기본 README.md 경로 설정
+DEFAULT_README_PATH="./README.md"
+readme_path=""
+specific_subfolder=""
 
-# MD 파일에서 챕터와 문제 내용 추출
-extract_contents() {
-    local current_chapter=""
-    local problem_number=0
-    
-    while IFS= read -r line; do
-        # 새로운 챕터 시작 확인 (## XX장: 으로 시작하는 라인)
-        if [[ $line =~ ^##[[:space:]]([0-9]+)장:[[:space:]](.+)$ ]]; then
-            current_chapter="${BASH_REMATCH[1]}"
-            problem_number=0
-        # 문제 번호 확인 (### 문제 X로 시작하는 라인)
-        elif [[ $line =~ ^###[[:space:]]문제[[:space:]]([0-9]+)$ ]] && [ ! -z "$current_chapter" ]; then
-            problem_number="${BASH_REMATCH[1]}"
-        # 문제 내용 저장
-        elif [ ! -z "$current_chapter" ] && [ $problem_number -gt 0 ] && [ ! -z "$line" ] && [[ ! $line =~ ^### ]]; then
-            key="${current_chapter}_${problem_number}"
-            chapter_contents[$key]+="$line"$'\n'
-        fi
-    done < "README.md"  # MD 파일 이름을 적절히 변경하세요
+# 사용법 출력 함수
+usage() {
+    echo "Usage: $0 [-r README_PATH] [-n SUBFOLDER_NAME]"
+    echo "  -r: Path to README.md file (default: ${DEFAULT_README_PATH})"
+    echo "  -n: Specific subfolder name to create (optional)"
+    echo "Available subfolder names: jongmlee, sabyun, semjeong, jimchoi, somilee"
+    exit 1
 }
 
-# 현재 폴더에서 chapter_XX 형태의 폴더 찾기
-last_chapter=$(ls -d chapter_* 2>/dev/null | sort -V | tail -n 1)
+# 커맨드 라인 인자 처리
+while getopts "r:n:h" opt; do
+    case $opt in
+        r)
+            readme_path="$OPTARG"
+            ;;
+        n)
+            specific_subfolder="$OPTARG"
+            ;;
+        h)
+            usage
+            ;;
+        \?)
+            usage
+            ;;
+    esac
+done
 
-# 만약 폴더가 없다면 기본값으로 chapter_00 설정
-if [ -z "$last_chapter" ]; then
-    next_number=0
-else
-    # 마지막 폴더 이름에서 숫자 추출
-    last_number=$(echo "$last_chapter" | sed 's/chapter_//')
-    next_number=$((10#$last_number + 1))
+# README 경로가 지정되지 않았다면 기본값 사용
+if [ -z "$readme_path" ]; then
+    readme_path="$DEFAULT_README_PATH"
 fi
 
-# 새로운 폴더 이름 생성 (숫자를 2자리로 맞추기)
-new_folder=$(printf "chapter_%02d" "$next_number")
+# README 파일 존재 확인
+if [ ! -f "$readme_path" ]; then
+    echo "Error: README file not found at: $readme_path"
+    exit 1
+fi
 
-# MD 파일 내용 추출
-extract_contents
-
-# 새로운 폴더 생성
-mkdir "$new_folder"
-echo "Created folder: $new_folder"
-
-# 서브폴더 생성 및 문제 파일 생성
+# 서브폴더 배열 정의
 subfolders=("jongmlee" "sabyun" "semjeong" "jimchoi" "somilee")
-chapter_key="$next_number"
 
-for subfolder in "${subfolders[@]}"; do
-    mkdir "$new_folder/$subfolder"
-    echo "Created subfolder: $new_folder/$subfolder"
+# 특정 서브폴더가 지정된 경우 유효성 검사
+if [ ! -z "$specific_subfolder" ]; then
+    is_valid=0
+    for subfolder in "${subfolders[@]}"; do
+        if [ "$specific_subfolder" == "$subfolder" ]; then
+            is_valid=1
+            break
+        fi
+    done
+    if [ $is_valid -eq 0 ]; then
+        echo "Error: Invalid subfolder name: $specific_subfolder"
+        usage
+    fi
+fi
+
+# README.md에서 해당 챕터의 문제들을 추출하는 함수
+extract_problems() {
+    chapter_num=$1
+    problem_num=$2
     
-    # 각 문제에 대한 JS 파일 생성
-    for problem in {1..3}; do
-        key="${chapter_key}_${problem}"
-        content="${chapter_contents[$key]}"
+    # 챕터 섹션을 찾아 문제 추출
+    awk -v ch="## ${chapter_num}장:" -v prob="### 문제 ${problem_num}" '
+        $0 ~ ch {p=1; next}
+        p==1 && $0 ~ prob {
+            print $0
+            in_problem=1
+            next
+        }
+        p==1 && in_problem==1 {
+            if ($0 ~ /^###/ || $0 ~ /^##/) {
+                in_problem=0
+                exit
+            }
+            print $0
+        }
+    ' "$readme_path"
+}
+
+# README에서 모든 챕터 번호 추출
+chapters=$(awk '/^## [0-9]+장:/ {gsub(/[^0-9]/, "", $2); print $2}' "$readme_path" | sort -n)
+
+# 각 챕터에 대해 처리
+for chapter_num in $chapters; do
+    chapter_folder="chapter_${chapter_num}"
+    echo "Processing chapter: $chapter_folder"
+    
+    # 서브폴더 생성 및 파일 생성
+    for subfolder in "${subfolders[@]}"; do
+        # 특정 서브폴더가 지정되었고, 현재 서브폴더가 아닌 경우 스킵
+        if [ ! -z "$specific_subfolder" ] && [ "$specific_subfolder" != "$subfolder" ]; then
+            continue
+        fi
+
+        subfolder_path="${chapter_folder}/${subfolder}"
         
-        # JS 파일 생성 및 내용 작성
-        cat > "$new_folder/$subfolder/answer$problem.js" << EOL
-/*
-문제 $problem
-${content}
-*/
-
-// 여기에 답안을 작성하세요
-
-EOL
-        echo "Created file: $new_folder/$subfolder/answer$problem.js"
+        # 서브폴더가 없는 경우에만 처리
+        if [ ! -d "$subfolder_path" ]; then
+            echo "Creating subfolder: $subfolder_path"
+            mkdir -p "$subfolder_path"
+            
+            # answer 파일 생성
+            for i in {1..3}; do
+                answer_file="${subfolder_path}/answer${i}.js"
+                
+                echo "Creating file: $answer_file"
+                echo "/*" > "$answer_file"
+                echo "Chapter ${chapter_num}" >> "$answer_file"
+                echo "" >> "$answer_file"
+                extract_problems ${chapter_num} ${i} >> "$answer_file"
+                echo "*/" >> "$answer_file"
+                echo "" >> "$answer_file"
+                echo "// Your solution" >> "$answer_file"
+            done
+        else
+            echo "Subfolder already exists: $subfolder_path"
+        fi
     done
 done
+
+echo "Finished creating/updating folder structure."
+echo "Used README file: $readme_path"
