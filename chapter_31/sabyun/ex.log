@@ -1,0 +1,6 @@
+2023-11-05 13:45:23 192.168.1.10 [ERROR] Failed to connect to the database.
+2023-11-05 13:46:01 192.168.1.11 [INFO] User login successful.
+2023-11-05 13:50:10 192.168.1.12 [WARNING] Disk space low.
+2023-11-05 13:52:33 192.168.1.10 [ERROR] File not found: /var/log/application.log.
+2023-11-05 14:01:23 192.168.1.13 [INFO] Scheduled job completed.
+2023-11-05 14:03:45 192.168.1.14 [ERROR] Out of memory.
