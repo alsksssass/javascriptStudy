@@ -63,4 +63,4 @@ function drawCalendar(year, month) {
 }
 
 drawCalendar(2024, 11);
-// drawCalendarWithoutColor(2024, 11);
+drawCalendarWithoutColor(2024, 11);
