@@ -7,10 +7,3 @@ Chapter 32
 */
 
 // Your solution
-
-function getPureText(str) {
-	return str.replace(/<[^>]+>/g, '');
-}
-
-const test = '<h1>Title</h1><p>This is a <strong>test</strong> paragraph.</p>';
-console.log(getPureText(test)); 

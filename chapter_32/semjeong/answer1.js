@@ -7,10 +7,3 @@ Chapter 32
 */
 
 // Your solution
-
-function parseEmail(e) {
-	const [_, u, d, t] = e.match(/^([^@]+)@([^@]+)\.([^@.]+)$/) || [];
-	return { u, d, t };
-  }
-  
-  console.log(parseEmail("user@example.com"));
