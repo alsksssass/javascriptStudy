@@ -7,3 +7,11 @@ Chapter 36
 */
 
 // Your solution
+
+function seperateFirst(arr) {
+  const [first, ...others] = arr;
+  return { first, others };
+}
+
+const arr = Array.from({ length: 10 }, (_, i) => i);
+console.log(seperateFirst(arr));

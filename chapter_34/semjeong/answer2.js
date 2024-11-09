@@ -7,3 +7,22 @@ Chapter 34
 */
 
 // Your solution
+function fibo() {
+  let [cur, pre] = [1, 0];
+  return {
+    [Symbol.iterator]() {
+      return this;
+    },
+    next() {
+      [cur, pre] = [cur + pre, cur];
+      return {
+        value: cur
+      };
+    }
+  };
+}
+
+for (let i of fibo()) {
+  if (i >= 100) break;
+  console.log(i);
+}

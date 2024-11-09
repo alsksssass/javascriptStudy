@@ -7,3 +7,8 @@ Chapter 35
 */
 
 // Your solution
+function sum(...arr) {
+  return arr.reduce((p, v) => p + v, 0);
+}
+
+console.log(sum(1, 2, 3, 4, 5, 6));

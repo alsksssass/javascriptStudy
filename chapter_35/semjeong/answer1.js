@@ -7,3 +7,10 @@ Chapter 35
 */
 
 // Your solution
+function unionArray(...arr) {
+  const ret = [];
+  arr.forEach(v => ret.push(...v));
+  return ret.filter((v, i) => i === ret.indexOf(v));
+}
+
+console.log(unionArray([1,2,3,4], [5,6,7], [8, 9, 10], [1,2,3,4], [5,6,7], [8, 9, 10], [1,2,3,4], [5,6,7], [8, 9, 10]))

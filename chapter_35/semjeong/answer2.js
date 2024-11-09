@@ -7,3 +7,18 @@ Chapter 35
 */
 
 // Your solution
+let obj = { name: "smj" };
+let obj2 = obj;
+obj2.name = "asdf";
+
+console.log('without spread op', obj, obj2);
+
+obj2 = { ...obj };
+obj2.name = 'smj';
+console.log('with spread op', obj, obj2);
+
+// 1 depth만 깊은 복사한다.
+obj.arr = [1, 2, 3];
+obj2 = { ...obj };
+obj2.arr[0] = 10;
+console.log(obj, obj2);
