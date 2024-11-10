@@ -7,3 +7,18 @@ Chapter 36
 */
 
 // Your solution
+const data = {
+    level1: {
+        level2: {
+            level3: {
+                key: "value"
+            },
+            level3_other: "another value"
+        },
+        level2_other: "yet another value"
+    }
+};
+
+const { level1: { level2 } } = data;
+const result = {level2};
+console.log(result);

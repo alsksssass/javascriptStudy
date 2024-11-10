@@ -7,3 +7,8 @@ Chapter 36
 */
 
 // Your solution
+function sliceArray(arr){
+	return{frist:arr[0],other:arr.slice(1)};
+}
+const arr = [1,2,3,4,5,6,7,8];
+console.log(sliceArray(arr));

@@ -44,7 +44,7 @@ class findLog {
 		return dateLog;
 	}
 	findLogByIp(ip){
-		const rexExp = /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/;
+		const rexExp = /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$/;
 		const ipLog = [];
 		if(!rexExp.test(ip))
 			return "wrong IP format"

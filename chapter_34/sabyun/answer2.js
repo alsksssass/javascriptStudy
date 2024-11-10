@@ -7,3 +7,24 @@ Chapter 34
 */
 
 // Your solution
+class UnlimitFibonacci{
+	constructor(){
+		this.pre =0;
+		this.cur =1;
+	}
+	
+	[Symbol.iterator] () {return this};
+
+	next(){
+		const value =this.cur + this.pre;
+		[this.cur, this.pre] = [this.cur + this.pre, this.cur];
+		return {value:this.cur}
+	}
+	
+}
+const unlimit = new UnlimitFibonacci();
+
+for(const num of unlimit){
+	console.log(num);
+	if(num > 100) break;
+}

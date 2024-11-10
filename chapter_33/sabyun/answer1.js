@@ -17,5 +17,5 @@ class hidden{
   const a = new hidden();
   
   console.log(a.geter());
-  console.log([Symbol.for('hidden')]);
+  console.log(a[Symbol.for('hidden')]);
   

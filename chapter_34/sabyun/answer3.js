@@ -7,3 +7,19 @@ Chapter 34
 */
 
 // Your solution
+
+const test = function(){
+	let num = 0;
+	return{
+	[Symbol.iterator](){return this},
+			next(){
+				num++;
+				return {value:num,done:num > 10}
+			}
+		}
+	}
+
+const a = test();
+for(const num of a){
+	console.log(num);
+}

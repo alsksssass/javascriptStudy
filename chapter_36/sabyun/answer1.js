@@ -7,3 +7,17 @@ Chapter 36
 */
 
 // Your solution
+const user = {
+    id: 1,
+    name: "John Doe",
+    email: "johndoe@example.com",
+    age: 30,
+    isActive: true
+};
+
+function remaker(data){
+	const {id,name} = data;
+	return {id, name};
+}
+
+console.log(remaker(user));

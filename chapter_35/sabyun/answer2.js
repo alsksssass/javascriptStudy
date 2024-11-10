@@ -7,3 +7,13 @@ Chapter 35
 */
 
 // Your solution
+function TrueCopy(target){
+	return {...target};
+}
+
+const test = {sabyun:'ddong'};
+const test2 = TrueCopy(test);
+test.sabyun = 'change';
+
+console.log(test.sabyun);
+console.log(test2.sabyun);
