@@ -6,4 +6,16 @@ Chapter 34
 
 */
 
-// Your solution
+const fibonacci = {
+    [Symbol.iterator]() {
+        let [pre, cur] = [0, 1];
+    return {
+        next() {
+            [pre, cur] = [cur, pre + cur];
+            return { value: cur, done: false };
+        }};
+    }};
+    
+for (const num of fibonacci) {
+    console.log(num);
+}

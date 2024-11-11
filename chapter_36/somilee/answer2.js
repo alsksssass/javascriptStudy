@@ -6,4 +6,10 @@ Chapter 36
 
 */
 
-// Your solution
+function getFirstAndLast(arr) {
+    const [first, ...last] = arr;
+    console.log(`first: ${first}, last: ${last.slice(-1)}`);
+}
+
+const arr = [1, 2, 3, 4, 5];
+getFirstAndLast(arr);

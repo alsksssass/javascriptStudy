@@ -6,4 +6,8 @@ Chapter 35
 
 */
 
-// Your solution
+function getSum(...num) {
+    return num.reduce((acc, n) => acc + n, 0);
+}
+
+console.log(getSum(1, 2, 3, 4, 5,));

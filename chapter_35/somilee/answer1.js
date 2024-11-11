@@ -6,4 +6,12 @@ Chapter 35
 
 */
 
-// Your solution
+function mergeArray(arr1, arr2, arr3) {
+    const arr = [...arr1, ...arr2, ...arr3];
+    return [...new Set(arr)];
+}
+
+const arr1 = [1, 2, 3];
+const arr2 = [2, 3, 4];
+const arr3 = [4, 5, 6];
+console.log(mergeArray(arr1, arr2, arr3));

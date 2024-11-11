@@ -6,4 +6,16 @@ Chapter 36
 
 */
 
-// Your solution
+const user = {
+    // id: 1,
+    name: 'somilee',
+    age: 26,
+    address: 'Ichon',
+    number: '010-3115-7496',
+    email: 'somin990202@naver.com'
+};
+
+const {id = 0, name, age} = user;
+const user1 = {id, name, age};
+
+console.log(user1);

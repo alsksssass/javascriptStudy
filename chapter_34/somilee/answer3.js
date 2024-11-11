@@ -6,4 +6,17 @@ Chapter 34
 
 */
 
-// Your solution
+function range(start, end) {
+    return {
+        [Symbol.iterator]() {
+            let cur = start;
+            return {
+                next() {
+                    return {done: cur > end, value: cur++};
+            }};
+    }};
+}
+
+for(const num of range(1, 5)) {
+    console.log(num);
+}
