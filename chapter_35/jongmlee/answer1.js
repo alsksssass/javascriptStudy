@@ -7,3 +7,14 @@ Chapter 35
 */
 
 // Your solution
+
+function solution(...arr) {
+	return [...new Set([].concat(...arr))];
+}
+
+const arr1 = [1, 2, 3];
+const arr2 = [2, 3, 4, 5];
+const arr3 = [3, 4, 6];
+
+console.log(solution(arr1, arr2, arr3));
+  

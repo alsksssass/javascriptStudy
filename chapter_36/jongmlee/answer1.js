@@ -7,3 +7,16 @@ Chapter 36
 */
 
 // Your solution
+
+const cat = {
+	name: "cherry",
+	age: 3,
+	breed: "Persian",
+	favoriteToy: "fur ball",
+	owner: { nick: "jongmlee" },
+	health: { weight: 4 }
+};
+
+const { name, age, breed, owner: { nick } } = cat;
+
+console.log({name, age, breed, nick});

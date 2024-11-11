@@ -7,3 +7,10 @@ Chapter 36
 */
 
 // Your solution
+
+function splitArray([first, ...rest]) {
+	return { first, rest };
+  }
+  
+  const result = splitArray([1, 2, 3, 4, 5]);
+  console.log(result);

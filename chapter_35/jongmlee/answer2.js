@@ -7,3 +7,14 @@ Chapter 35
 */
 
 // Your solution
+
+function myDeepCopy(arr) {
+	return {...arr};
+}
+
+const t1 = {x : 2, y: 3};
+const copied = myDeepCopy(t1);
+
+console.log(t1);
+console.log(copied);
+console.log(copied === t1);
