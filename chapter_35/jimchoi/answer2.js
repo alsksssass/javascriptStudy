@@ -7,3 +7,24 @@ Chapter 35
 */
 
 // Your solution
+const obj = {
+  name: "jimchoi",
+  age: 26,
+  address: {
+    city: "wonju",
+  },
+};
+
+let copy = { ...obj };
+obj.address.city = "seoul";
+console.log(copy);
+
+// const deepClone = (obj)=> {
+// 	return {...Object.keys(obj).reduce((acc,cur) => {
+// 		acc[cur] = deepClone(obj[cur]);
+// 		return acc;
+// 	}, {})};
+// }
+// obj.address.city = ".";
+// copy = deepClone(obj);
+// console.log()

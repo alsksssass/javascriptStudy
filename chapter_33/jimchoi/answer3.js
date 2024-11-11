@@ -7,3 +7,16 @@ Chapter 33
 */
 
 // Your solution
+
+const BuiltInSymbol= {
+    value: 1,
+    [Symbol.toPrimitive](input) {
+        if (input === "number") {
+            return this.value;
+        }
+        if (input === "string") {
+            return `${this.value}`;
+        }
+        return this.value;
+    }
+};

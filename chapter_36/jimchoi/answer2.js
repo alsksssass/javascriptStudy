@@ -7,3 +7,8 @@ Chapter 36
 */
 
 // Your solution
+
+const f = (first, ...rest) => {
+	return {first, rest};
+}
+
