@@ -19,12 +19,19 @@ let copy = { ...obj };
 obj.address.city = "seoul";
 console.log(copy);
 
-// const deepClone = (obj)=> {
-// 	return {...Object.keys(obj).reduce((acc,cur) => {
-// 		acc[cur] = deepClone(obj[cur]);
-// 		return acc;
-// 	}, {})};
-// }
-// obj.address.city = ".";
-// copy = deepClone(obj);
-// console.log()
+
+const deepCopy =  (obj)=> {
+  const result = {};
+  if (typeof obj === 'object' && obj !== null) {
+    for (const key in obj) {
+      result[key] = deepCopy(obj[key]);
+    }
+  } else {
+    return obj;
+  }
+  return result;
+};
+
+const deep = deepCopy(obj);
+obj.address.city = "deepCopy";
+console.log(deep);

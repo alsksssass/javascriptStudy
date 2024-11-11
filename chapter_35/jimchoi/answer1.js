@@ -10,11 +10,13 @@ Chapter 35
 
 const makeArr = (...args) => {
   let arr = [].concat(...args);
-  let result=[];
-	
+  // let arr = [];
+  // arr.splice(1, 0, ...args);
+  console.log("arr : ", arr);
+  let result = [];
+
   arr.forEach((item) => {
-    if (!result.includes(item)) 
-		result.push(item);
+    if (!result.includes(item)) result.push(item);
   });
   return result;
 };
