@@ -7,3 +7,9 @@ Chapter 37
 */
 
 // Your solution
+
+function union(...args){
+	return[...new Set(args.flat())];
+}
+
+console.log(union([1,2,3],[4,5],[3,4]));
