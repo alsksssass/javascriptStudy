@@ -1,0 +1,143 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+.Todo_List {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#input_box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.input_btn,
+.sorta_btn,
+.sortd_btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* 호버 효과도 마찬가지로 콤마로 구분 */
+.input_btn:hover,
+.sorta_btn:hover,
+.sortd_btn:hover {
+    background-color: #45a049;
+}
+
+/* 버튼들 사이의 간격을 주고 싶다면 */
+.sorta_btn,
+.sortd_btn {
+    margin-left: 10px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border-left: 4px solid #4CAF50;
+    transition: transform 0.2s, box-shadow 0.2s;
+    list-style-type: none;
+}
+
+li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.text-container {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.todo-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    flex: 1;
+    min-width: 200px;
+    padding-right: 20px;  /* 오른쪽 여백 추가 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+}
+
+/* 날짜와 버튼을 감싸는 새로운 컨테이너 */
+.date-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    gap: 5px;  /* 날짜와 버튼 사이의 최소 간격 */
+}
+
+.todo-date {
+    color: #666;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+.delete-btn {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.delete-btn:hover {
+    color: white;
+    background-color: red;
+    transform: scale(1.05);
+}
+
+.ex {
+	height: 20px;
+	width: 10px;
+	background: #fcdba1;
+	height: 20px;
+	margin: 10px 0;  /* 상하 여백 추가 */
+	display: block;  /* 블록 레벨 요소로 만들어 자동 개행 */
+    margin-bottom: 10px; 
+  }
+  
+@media (max-width: 768px) {
+    .Todo_List {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .todo-text {
+        min-width: 150px;
+    }
+
+    .date-button-container {
+        font-size: 0.9em;
+    }
+}
