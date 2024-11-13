@@ -1,0 +1,86 @@
+<!--
+Chapter 39
+
+### 문제 2
+트리 구조의 메뉴를 DOM API를 사용하여 구현하세요.
+
+*/
+
+// Your solution
+
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Tree Menu</title>
+  <style>
+    .menu-item { cursor: pointer; }
+    .submenu { display: none; margin-left: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>Cat Tree Menu</h2>
+  <div id="menu-container"></div>
+
+  <script>
+    // Sample tree menu data
+    const catMenu = [
+      {
+        name: "고양이 종류",
+        children: [
+          {
+            name: "단모종",
+            children: [
+              { name: "아메리칸 쇼트헤어" },
+              { name: "브리티시 쇼트헤어" }
+            ]
+          },
+          {
+            name: "장모종",
+            children: [
+              { name: "페르시안" },
+              { name: "메인쿤" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // Function to create tree menu
+    function createMenu(items, parent) {
+      items.forEach(item => {
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("menu-item");
+        itemElement.textContent = item.name;
+
+        // Toggle submenu visibility on click
+        itemElement.addEventListener("click", () => {
+          const submenu = itemElement.nextElementSibling;
+          if (submenu) {
+            submenu.style.display = submenu.style.display === "none" ? "block" : "none";
+          }
+        });
+
+        parent.appendChild(itemElement);
+
+        // If item has children, create a submenu
+        if (item.children) {
+          const submenu = document.createElement("div");
+          submenu.classList.add("submenu");
+          createMenu(item.children, submenu);
+          parent.appendChild(submenu);
+        }
+      });
+    }
+
+    // Append menu to container
+    const menuContainer = document.getElementById("menu-container");
+    createMenu(catMenu, menuContainer);
+  </script>
+
+</body>
+</html>

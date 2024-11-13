@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame Example</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="200"></canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let x = 0; // 원의 초기 x 위치
+    const y = canvas.height / 2; // 원의 y 위치 (고정)
+    const radius = 20; // 원의 반지름
+    const speed = 2; // 원이 이동하는 속도
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
+
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+      ctx.fillStyle = 'blue';
+      ctx.fill();
+
+      x += speed; // x 좌표 업데이트
+
+      // 캔버스를 벗어날 경우 원을 처음 위치로 되돌림
+      if (x - radius > canvas.width) {
+        x = -radius;
+      }
+
+      requestAnimationFrame(animate); // 다음 프레임 요청
+}
+
+	//setInterval(animate, 16);
+    animate(); // 애니메이션 시작
+  </script>
+</body>
+</html>

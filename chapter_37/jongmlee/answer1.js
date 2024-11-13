@@ -7,3 +7,10 @@ Chapter 37
 */
 
 // Your solution
+
+const removeDuplicate = (arr) => {
+	return [...new Set(arr)];
+}
+
+arr = [1, 1, 1, 2, 3, 3, 4, 5, 5, 6];
+console.log(removeDuplicate(arr));

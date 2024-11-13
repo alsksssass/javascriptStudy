@@ -1,0 +1,58 @@
+<!--
+Chapter 39
+
+### 문제 1
+입력받은 데이터로 동적으로 테이블을 생성하는 함수를 작성하세요.
+
+
+
+// Your solution
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Info Table</title>
+</head>
+<body>
+
+  <h2>Cat Information Table</h2>
+  <div id="table-container"></div>
+
+  <script>
+    const catData = [
+		{ name: "Cherry", age: 4, breed: "Persian" },
+		{ name: "Hanuel", age: 2, breed: "Siamese" },
+		{ name: "loco", age: 1, breed: "Scottish fold" }
+	];
+
+	function createTable(data) {
+		const table = document.createElement("table");
+		table.border = "11";
+
+		const header = table.insertRow();
+		Object.keys(data[0]).forEach(key => {
+			const th = document.createElement("th");
+			th.textContent = key;
+			header.appendChild(th);
+		});
+
+		data.forEach(item => {
+			const row = table.insertRow();
+			Object.values(item).forEach(value => {
+				const cell = row.insertCell();
+				cell.textContent = value;
+			});
+		});
+
+		return table;
+	}
+
+    // Append table to container
+    document.getElementById("table-container").appendChild(createTable(catData));
+  </script>
+
+</body>
+</html>
