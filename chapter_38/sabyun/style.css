@@ -24,6 +24,28 @@ body {
     margin-right: 10px;
     flex: 1;
 }
+#input_box.error{
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 4px;
+    margin-right: 10px;
+    flex: 1;
+    animation: shake 0.5s linear;
+}
+
+#input_box.error::placeholder{
+    color: red;
+    text-shadow: red;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
 
 .input_btn,
 .sorta_btn,
