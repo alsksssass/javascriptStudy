@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Interactive Page</title>
+    <style>
+        body {
+            display: flex; /*페이지 Flexbox로 설정*/
+            flex-direction: column; /*세로 정렬*/
+            justify-content: center; /*세로 가운데 정렬*/
+            align-items: center; /*가로 가운데 정렬*/
+            min-height: 100vh; /*화면 높이 설정*/
+            margin: 0; /*여백 제거*/
+        }
+        h1 { /* 제목 */
+            color: rgb(34, 104, 244);
+            font-size: 24px;
+            font-family: Arial;
+            text-align: center;
+        }
+        p {
+            color: gray;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #cat-image {
+            max-width: 400px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>고양이는 어떻게 생겼을까요?</h1>
+    <p>고양이 앞모습입니다!</p>
+    <img id="cat-image" src="cat1.png">
+    <button>뒤집기</button>
+
+    <script>
+        const button = document.querySelector("button");
+        const message = document.querySelector("p");
+        const catImage = document.getElementById("cat-image");
+
+        let isButtonClicked = false;
+        button.addEventListener("click", function() {
+            alert("고양이를 뒤집었습니다!");
+            if (isButtonClicked) {
+                message.textContent = "고양이 앞모습입니다!";
+                catImage.src = "cat1.png";
+            }
+            else {
+                message.textContent = "고양이 뒷모습입니다!";
+                catImage.src = "cat2.png";
+            }
+            isButtonClicked = !isButtonClicked;
+        });
+    </script>
+</body>

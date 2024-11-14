@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table Example</title>
+    <style>
+        /* 테이블 스타일 */
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            text-align: left;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Dynamic Table</h2>
+
+    <script>
+        // 예시 데이터
+        const data = [
+            { Name: "소민", Age: 26, City: "서울" },
+            { Name: "종민", Age: 30, City: "안산" },
+            { Name: "상훈", Age: 28, City: "대구" }
+        ];
+
+        // 테이블 생성 함수
+        function createDynamicTable(data) {
+            if (!data || data.length === 0) {  
+                console.log("데이터가 비어 있습니다.");
+                return;
+            }
+
+            const table = document.createElement("table");  // 테이블 요소 생성
+            const headerRow = document.createElement("tr"); // 테이블 헤더 행 생성
+
+            // 헤더 생성 - 첫번쨰 항목의 키(Name, Age, City)로 테이블 헤더 생성
+            Object.keys(data[0]).forEach(key => {
+                const th = document.createElement("th"); // 테이블 헤더 생성
+                th.textContent = key; 
+                headerRow.appendChild(th);
+            });
+            table.appendChild(headerRow);
+
+            // 데이터 행 생성
+            data.forEach(item => {
+                const row = document.createElement("tr"); // 데이터 행 생성
+                Object.values(item).forEach(value => {
+                    const td = document.createElement("td");
+                    td.textContent = value; // 값 설정
+                    row.appendChild(td); // 행 추가
+                });
+                table.appendChild(row); // 테이블 추가
+            });
+
+            document.body.appendChild(table); // 완성된 테이블 HTML추가
+        }
+
+        // 함수 호출
+        createDynamicTable(data);
+    </script>
+
+</body>
+</html>

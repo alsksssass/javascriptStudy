@@ -1,0 +1,21 @@
+<form>
+    <label>Email: </label>
+    <input type="email" required>
+
+    <label>Age: </label>
+    <input type="number" min="19" max="100" required>
+
+    <label>Nickname: </label>
+    <input  minlength="3" maxlength="10" required>
+    
+    <button type="submit">Submit</button>
+</form>
+<!--
+   < HTML5 속성을 이용한 유효성 검사 >
+
+    - required: 필수 입력 필드
+    - type: 입력 유형을 설정 (email, number, url 등)
+    - min / max: 입력 숫자의 최소/최대값
+    - minlength / maxlength: 문자열의 최소/최대 길이
+    - pattern: 정규식을 이용한 입력 패턴 설정 
+-->

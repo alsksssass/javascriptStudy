@@ -1,0 +1,145 @@
+/*
+Chapter 38
+
+### 문제 2
+레이아웃 스래싱을 발생시키는 코드를 작성하고, 최적화하세요.
+
+*/
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>레이아웃 스레싱 데모</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .box-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 45%;
+        }
+
+        .box {
+            width: 100%;
+            height: 50px;
+            background-color: #3498db;
+            margin: 10px 0;
+            transition: height 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .performance-result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>레이아웃 스레싱 성능 비교</h1>
+    
+    <div class="container">
+        <div class="box-container">
+            <h2>비최적화 버전</h2>
+            <div id="bad-container">
+                <div class="box">Box 1</div>
+                <div class="box">Box 2</div>
+                <div class="box">Box 3</div>
+                <div class="box">Box 4</div>
+                <div class="box">Box 5</div>
+                <div class="box">Box 6</div>
+                <div class="box">Box 7</div>
+                <div class="box">Box 8</div>
+            </div>
+            <button onclick="runBadPerformance()">실행</button>
+        </div>
+
+        <div class="box-container">
+            <h2>최적화 버전</h2>
+            <div id="good-container">
+                <div class="box">Box 1</div>
+                <div class="box">Box 2</div>
+                <div class="box">Box 3</div>
+                <div class="box">Box 4</div>
+                <div class="box">Box 5</div>
+                <div class="box">Box 6</div>
+                <div class="box">Box 7</div>
+                <div class="box">Box 8</div>
+            </div>
+            <button onclick="runGoodPerformance()">실행</button>
+        </div>
+    </div>
+
+    <div class="performance-result" id="result"></div>
+
+    <script>
+        function runBadPerformance() {
+            const startTime = performance.now();
+            const boxes = document.querySelectorAll('#bad-container .box');
+            
+            boxes.forEach(box => {
+                // 강제로 레이아웃 계산을 발생시킴
+                const height = box.offsetHeight;
+                box.style.height = (height + 20) + 'px';
+                // 시각적 효과를 위해 지연
+                void box.offsetHeight;
+            });
+
+            const endTime = performance.now();
+            updateResult('비최적화', endTime - startTime);
+        }
+
+        function runGoodPerformance() {
+            const startTime = performance.now();
+            const boxes = document.querySelectorAll('#good-container .box');
+            
+            // 모든 읽기 작업을 먼저 수행
+            const heights = Array.from(boxes).map(box => box.offsetHeight);
+            
+            // 모든 쓰기 작업을 한번에 수행
+            boxes.forEach((box, i) => {
+                box.style.height = (heights[i] + 20) + 'px';
+            });
+
+            const endTime = performance.now();
+            updateResult('최적화', endTime - startTime);
+        }
+
+        function updateResult(type, time) {
+            const resultDiv = document.getElementById('result');
+            const newResult = document.createElement('p');
+            newResult.textContent = `${type} 버전 실행 시간: ${time.toFixed(2)}ms`;
+            resultDiv.appendChild(newResult);
+        }
+    </script>
+</body>
+</html>

@@ -6,4 +6,12 @@ Chapter 37
 
 */
 
-// Your solution
+class recentSearch {
+    constructor() {
+        this.map = new Map();
+    }
+    
+    search(word) {
+        this.map
+    }
+}

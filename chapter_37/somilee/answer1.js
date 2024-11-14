@@ -6,4 +6,9 @@ Chapter 37
 
 */
 
-// Your solution
+function removeDup(arr) {
+    return [...new Set(arr)];
+}
+
+const arr = [1,2,3,4,4,5,6,6,7,8,9];
+console.log(removeDup(arr));
