@@ -23,7 +23,7 @@ function getword (){
 		console.log(input);
 		recentlyKeyWords.push(input);
 		console.log(recentlyKeyWords.length);
-		recentlyKeyWords = recentlyKeyWords.length > 4 ? recentlyKeyWords.slice(1,6) : recentlyKeyWords;
+		recentlyKeyWords = recentlyKeyWords.length > 5 ? recentlyKeyWords.slice(1,6) : recentlyKeyWords;
 		console.log('history',recentlyKeyWords);
 		getword();
 	});

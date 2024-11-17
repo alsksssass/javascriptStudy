@@ -60,6 +60,7 @@ Chapter 39
         // Toggle submenu visibility on click
         itemElement.addEventListener("click", () => {
           const submenu = itemElement.nextElementSibling;
+          console.log('submenu: ', submenu);
           if (submenu) {
             submenu.style.display = submenu.style.display === "none" ? "block" : "none";
           }
