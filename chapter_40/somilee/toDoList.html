@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <style>
+        /* 전체 레이아웃 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #todo-app {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 할 일 리스트 스타일 */
+        #todo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: move; /* 드래그할 때 커서 모양을 변경 */
+        }
+
+        #todo-list li button {
+            background-color: #ff4d4d;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #todo-list li button:hover {
+            background-color: #cc0000;
+        }
+
+        /* change-background 버튼을 왼쪽 아래에 고정 위치로 배치 */
+        #change-background {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #change-background:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+    <button type="button" id="change-background">Change Background</button> <!-- 배경색 변경 버튼 -->
+
+    <div id="todo-app">
+        <div id="clock"></div>
+        <h1>To-Do List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Enter a new task" required>
+            <button type="submit">Add Task</button>
+            <button type="submit" id="search-button">Search</button>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        // DOM 요소 선택
+        const todoForm = document.getElementById("todo-form");
+        const todoInput = document.getElementById("todo-input");
+        const todoList = document.getElementById("todo-list");
+        const todoSearch = document.getElementById("search-button");
+        const changeBackgroundButton = document.getElementById("change-background");
+
+        // 할 일 저장용 배열
+        let todos = [];
+
+        // 할 일 추가 함수
+        function addTodo(event) {
+            event.preventDefault(); // 폼 제출 기본 동작 막기
+            const newTodo = todoInput.value.trim(); // 입력값 가져오기 (앞뒤 공백 제거)
+            if (newTodo === "") return; // 빈 입력값 방지
+
+            todos.push(newTodo); // 배열에 새 할 일 추가
+            renderTodos(); // 화면 업데이트
+            todoInput.value = ""; // 입력 필드 초기화
+        }
+
+        // 검색 함수
+        function searchTodo(event) {
+            event.preventDefault();
+            const search = todoInput.value.trim();
+            if (search === "") return;
+
+            const searchIdx = todos.findIndex(todo => todo === search);
+            if (searchIdx === -1) return;
+
+            todos.splice(searchIdx, 1); // 해당 항목 제거
+            todos.unshift(search); // 배열 앞에 추가
+
+            renderTodos();
+            todoInput.value = "";
+        }
+
+        // 할 일 삭제 함수
+        function deleteTodo(index) {
+            todos.splice(index, 1); // 배열에서 해당 항목 제거
+            renderTodos(); // 화면 업데이트
+        }
+
+        // 할 일 목록 렌더링 함수
+        function renderTodos() {
+            todoList.innerHTML = ""; // 기존 리스트 초기화
+
+            todos.forEach((todo, index) => {
+                const li = document.createElement("li"); // <li> 요소 생성
+                li.textContent = todo;
+
+                // 드래그 가능하게 설정
+                li.setAttribute("draggable", "true");
+                li.dataset.index = index; // 각 항목의 인덱스를 데이터 속성으로 추가
+
+                // 드래그 시작 시 호출되는 함수
+                li.addEventListener("dragstart", (e) => {
+                    e.dataTransfer.setData("text/plain", index); // 드래그된 항목의 인덱스를 저장
+                });
+
+                // 삭제 버튼 생성
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => deleteTodo(index)); // 클릭 시 삭제
+
+                li.appendChild(deleteButton); // <li>에 버튼 추가
+                todoList.appendChild(li); // <ul>에 <li> 추가
+            });
+        }
+
+        // 드래그 대상 항목을 드롭할 수 있게 설정
+        todoList.addEventListener("dragover", (e) => {
+            e.preventDefault(); // 기본 드롭 동작 방지
+        });
+
+        todoList.addEventListener("drop", (e) => {
+            e.preventDefault(); // 기본 드롭 동작 방지
+
+            const fromIndex = e.dataTransfer.getData("text/plain"); // 드래그한 항목의 인덱스
+            const toIndex = e.target.dataset.index; // 드롭된 위치의 인덱스
+
+            if (fromIndex === toIndex) return; // 같은 위치에서 드래그하면 아무 일도 일어나지 않음
+
+            // 배열 내 항목들의 순서를 변경
+            const movedTodo = todos.splice(fromIndex, 1)[0]; // 드래그한 항목을 배열에서 제거
+            todos.splice(toIndex, 0, movedTodo); // 새 위치에 항목을 삽입
+
+            renderTodos(); // 화면 업데이트
+        });
+
+        // 배경색을 랜덤으로 변경하는 함수
+        function changeBackgroundColor() {
+            // 랜덤 색상 생성
+            const randomColor = `hsl(${Math.random() * 360}, 65%, 79%)`; //색상(0~360), 채도, 밝기
+            document.body.style.backgroundColor = randomColor; // 페이지 배경색 변경
+        }
+        
+        todoForm.addEventListener("submit", addTodo); // Add Task
+        todoSearch.addEventListener("click", searchTodo); // Search
+        changeBackgroundButton.addEventListener("click", changeBackgroundColor); // Change Background
+    </script>
+</body>
+</html>
