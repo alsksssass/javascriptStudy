@@ -18,3 +18,16 @@ function solution(cards1, cards2, goal) {
 }
 
 console.log(solution(card1,card2,global));
+
+function solution(ingredient) {
+	let answer = 0;
+	for (let i = 0; i < ingredient.length - 4; i++) {
+		if (ingredient[i]) {
+			answer++
+			string = string.replace("1231", "");
+		}
+		else
+			break;
+	}
+	return answer;
+}
