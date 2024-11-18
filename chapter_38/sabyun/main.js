@@ -100,32 +100,12 @@ function todoStart(){
 	const trash = document.querySelectorAll('.del').forEach(a=>a.remove());
 	const todo = new Todo;
 }
-// 문제가 되는 코드
-// function requestAnimation(){
-//     gague1+=10;
-//     requestEl.style.height = `${gague1}px`; // 레이아웃 변경 발생
-//     const id = requestAnimationFrame(requestAnimation);
-//     if(gague1 > window.innerHeight){ // 레이아웃 강제 계산 발생
-//         cancelAnimationFrame(id);
-//         if(!istodo) {
-//             istodo = true;
-//             todoStart();
-//         };
-//     }
-// }
 
 function requestAnimation(){
-    // 레이아웃 읽기를 한 번만 수행
-    const windowHeight = window.innerHeight;
-    
-    // transform을 사용하여 레이아웃 리플로우 방지
-	// 리플로우란? 리플로우(Reflow)는 브라우저가 웹 페이지의 레이아웃을 다시 계산하는 프로세스입니다. DOM 요소의 크기나 위치가 변경될 때 발생하며, 성능에 큰 영향을 미칩니다.
     gague1+=10;
-    requestEl.style.transform = `scaleY(${gague1/windowHeight})`;
-    requestEl.style.transformOrigin = 'bottom';
-    
+    requestEl.style.height = `${gague1}px`; // 레이아웃 변경 발생
     const id = requestAnimationFrame(requestAnimation);
-    if(gague1 > windowHeight){
+    if(gague1 > window.innerHeight){ // 레이아웃 강제 계산 발생
         cancelAnimationFrame(id);
         if(!istodo) {
             istodo = true;
@@ -134,31 +114,31 @@ function requestAnimation(){
     }
 }
 
-// function intervalDo(){
-//     const id = setInterval(()=>{
-//         gague2+=10;
-//         intervalEl.style.height = `${gague2}px`; // 레이아웃 변경 발생
-//         if(gague2 > window.innerHeight) { // 레이아웃 강제 계산 발생
-//             clearInterval(id)
-//             if(!istodo) {
-//                 istodo = true;
-//                 todoStart();
-//             };
+// function requestAnimation(){
+//     // 레이아웃 읽기를 한 번만 수행
+//     const windowHeight = window.innerHeight;
+    
+//     // transform을 사용하여 레이아웃 리플로우 방지
+// 	// 리플로우란? 리플로우(Reflow)는 브라우저가 웹 페이지의 레이아웃을 다시 계산하는 프로세스입니다. DOM 요소의 크기나 위치가 변경될 때 발생하며, 성능에 큰 영향을 미칩니다.
+//     gague1+=10;
+//     requestEl.style.transform = `scaleY(${gague1/windowHeight})`;
+//     requestEl.style.transformOrigin = 'bottom';
+    
+//     const id = requestAnimationFrame(requestAnimation);
+//     if(gague1 > windowHeight){
+//         cancelAnimationFrame(id);
+//         if(!istodo) {
+//             istodo = true;
+//             todoStart();
 //         };
-//     },1000/60);
+//     }
 // }
 
 function intervalDo(){
-    // 레이아웃 읽기를 한 번만 수행
-    const windowHeight = window.innerHeight;
-    
     const id = setInterval(()=>{
         gague2+=10;
-        // transform을 사용하여 레이아웃 리플로우 방지
-        intervalEl.style.transform = `scaleY(${gague2/windowHeight})`;
-        intervalEl.style.transformOrigin = 'bottom';
-        
-        if(gague2 > windowHeight) {
+        intervalEl.style.height = `${gague2}px`; // 레이아웃 변경 발생
+        if(gague2 > window.innerHeight) { // 레이아웃 강제 계산 발생
             clearInterval(id)
             if(!istodo) {
                 istodo = true;
@@ -167,6 +147,26 @@ function intervalDo(){
         };
     },1000/60);
 }
+
+// function intervalDo(){
+//     // 레이아웃 읽기를 한 번만 수행
+//     const windowHeight = window.innerHeight;
+    
+//     const id = setInterval(()=>{
+//         gague2+=10;
+//         // transform을 사용하여 레이아웃 리플로우 방지
+//         intervalEl.style.transform = `scaleY(${gague2/windowHeight})`;
+//         intervalEl.style.transformOrigin = 'bottom';
+        
+//         if(gague2 > windowHeight) {
+//             clearInterval(id)
+//             if(!istodo) {
+//                 istodo = true;
+//                 todoStart();
+//             };
+//         };
+//     },1000/60);
+// }
 
 let gague1 =10;
 let gague2 =10;
