@@ -124,10 +124,22 @@
         const todoList = document.getElementById("todo-list");
         const todoSearch = document.getElementById("search-button");
         const changeBackgroundButton = document.getElementById("change-background");
+        const clockElement = document.getElementById("clock");
 
         // 할 일 저장용 배열
         let todos = [];
 
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0'); // 2자리로 출력
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // 2자리로 출력
+            const seconds = String(now.getSeconds()).padStart(2, '0'); // 2자리로 출력
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`; // 시계에 시간 표시
+        }
+
+        // setInterval로 1초마다 시계 업데이트
+        setInterval(updateClock, 1000);
+        
         // 할 일 추가 함수
         function addTodo(event) {
             event.preventDefault(); // 폼 제출 기본 동작 막기
