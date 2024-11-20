@@ -1,0 +1,59 @@
+.log-container {
+	width: 300px;
+	height: 200px;
+	overflow-y: auto;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.log-container::-webkit-scrollbar {
+	width: 8px;
+}
+
+.log-container::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.log-item {
+	list-style: none;
+	padding: 8px;
+	margin: 5px 0;
+	border-bottom: 1px solid #eee;
+	word-break: break-all;
+	font-family: monospace;
+}
+
+.post-box {
+	margin-bottom: 15px;
+}
+
+.post-box input {
+	padding: 5px;
+	margin-right: 5px;
+}
+
+.post-box button, .get-button {
+	padding: 5px 10px;
+	cursor: pointer;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 3px;
+}
+
+.post-box button:hover, .get-button:hover {
+	background-color: #45a049;
+}
