@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 게시판</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>간단한 게시판</h1>
+        <div class="form-container">
+            <input type="text" id="post-title" placeholder="제목" />
+            <textarea id="post-content" placeholder="내용"></textarea>
+            <button id="submit-post" type="button">게시글 작성</button>
+        </div>
+        <div class="board">
+            <ul id="post-list">
+                <!-- 게시글이 여기에 동적으로 추가됩니다 -->
+            </ul>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<pre></pre>
+		<script>
+			const xhr = new XMLHttpRequest();
+			// HTTP 요청 초기화
+			xhr.open('PUT', '/todos/4');
+
+			xhr.setRequestHeader('content-type', 'application/json');
+
+			// HTTP 요청 전송
+			xhr.send(JSON.stringify({
+				id: 4,
+				content: 'React',
+				completed: true
+			}));
+
+			// load 이벤트는 요청이 성공적으로 완료된 경우 발생
+			xhr.onload = () => {
+				if (xhr.status === 200) {
+					document.querySelector('pre').textContent = xhr.response;
+				} else {
+					console.error('Error', xhr.status, xhr.statusText);
+				}
+			}
+		</script>
+	</body>
+</html>

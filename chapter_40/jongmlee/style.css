@@ -56,5 +56,6 @@
   }
 
   li input[type="checkbox"] {
+	width: 10px; 
 	margin-right: 10px;
   }
