@@ -108,9 +108,26 @@ class todo_category{
 		$box.classList.add('box');
 		$box.style.left = '357px';
 		$box.style.top = '417px';
+		$box.draggable = true; //추가
 		this.mainBox.append($box);
-		$box.addEventListener('mousemove',this.moveMouse);
-		$box.addEventListener('mousedown',this.downMouse);
+		// $box.addEventListener('mousemove',this.moveMouse);
+		// $box.addEventListener('mousedown',this.downMouse);
+		$box.addEventListener('dragstart', this.dragging)
+		$box.addEventListener('dragend', this.dragend)
+	}
+	dragging(event) {
+		this.drag = true;
+		while (this.drag = true) {
+			console.log(this.drag)
+			event.target.style.left = `${(parseInt(event.clientY))}px`;
+			event.target.style.top = `${parseInt(event.clientY)}px`;
+			this.pre_mouse.x = event.clientX;
+			this.pre_mouse.y = event.clientY;
+		}
+	}
+	dragend(event) {
+		this.drag = false;
+		event.preventDefault();
 	}
 	downMouse(event){
 		this.drag = true;
@@ -119,6 +136,7 @@ class todo_category{
 	}
 	moveMouse(event){
 		if(this.drag){
+			console.log(this.drag)
 			event.target.style.left = `${(parseInt(event.target.style.left) || 0) + (event.clientX -this.pre_mouse.x)}px`;
 			event.target.style.top = `${(parseInt(event.target.style.top) || 0) + (event.clientY -this.pre_mouse.y)}px`;
 			this.pre_mouse.x = event.clientX;
