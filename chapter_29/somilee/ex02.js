@@ -9,8 +9,9 @@ function solution(n, m) {
 
     const cnt = {};
     result.forEach(x => { cnt[x] = (cnt[x] || 0) + 1; });
-    const maxKey = Object.keys(cnt).reduce((a, b) => cnt[a] > cnt[b] ? a : b);
-
+    const maxKey = Object.values(cnt);
+    console.log(cnt);
+    console.log(maxKey);
     const variance = result.reduce((acc, x) => acc + Math.pow((x - arg), 2)) / m;
     console.log(`랜덥값 [${result}]의 평균은 ${arg}, 최빈값은 ${maxKey}, 분산은 ${Math.floor(variance * 10) / 10}입니다.`);
 }

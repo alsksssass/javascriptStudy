@@ -6,7 +6,7 @@ function solution(arr) {
         if(n == 1 && stack.length >= 4) {
             const tmp = stack.slice(stack.length - 4);
             if(tmp[0] == 1 && tmp[1] == 2 && tmp[2] == 3 && tmp[3] == 1) {
-                stack.sloce(-4, 4); // stack = stack.slice(0, stack.length -4)는 시간초과
+                stack.splice(-4, 4); // stack = stack.slice(0, stack.length -4)는 시간초과
                 cnt++;
             }
         }
