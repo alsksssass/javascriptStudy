@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <pre></pre>
+        <script>
+            fetch('/todos')
+                .then(response => response.json())
+                .then(json => console.log(json));
+            const request = {
+                get(url) {
+                    return fetch(url);
+                },
+                post(url, payload) {
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: {'content-Type': 'application/json'},
+                        body: JSON.stringify(payload)
+                    });
+                },
+                patch(url, payload) {
+                    return fetch(url, {
+                        method: 'PATCH',
+                        headers: {'content-Type': 'application.json'},
+                        body: JSON.stringify(payload)
+                    });
+                },
+                delete(url, payload) {
+                    return fetch(url, {
+                        method: 'DELETE'
+                    });
+                }
+            };
+
+            // GET 요청
+            request.get('/todos/2')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error(error));
+            
+            // // POST 요청
+            request.post('/todos', {
+                id: 4, 
+                content: 'Angular', 
+                complete: false
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error(error));
+
+            // PATCH 요청
+            request.patch('/todos/4', {
+                complete: true
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error(error));
+
+            // DELETE 요청
+            request.delete('/todos/4')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error(error));
+        </script>
+    </body>
+</html>
