@@ -7,3 +7,24 @@ Chapter 47
 */
 
 // Your solution
+
+errorMap = new Map();
+
+class CustomEerror extends Error {
+	constructor(message, code) {
+		super(message);
+		this.name = "CustomError";
+		this.code = code;
+	}
+}
+
+function f() {
+	throw new CustomEerror("custom error occured!!", 404);
+}
+
+try {
+	f();
+} catch (e) {
+	errorMap.set(Date.now(), e.message);
+	console.log(errorMap);
+}

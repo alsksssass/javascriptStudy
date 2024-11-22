@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calculator</title>
+    <script type="module" defer>
+        import { add, subtract, multiply, divide } from './cal.mjs';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const num1Input = document.getElementById('num1');
+            const num2Input = document.getElementById('num2');
+            const resultsDiv = document.getElementById('results');
+            const calculateButton = document.getElementById('calculate');
+
+            calculateButton.addEventListener('click', () => {
+                const a = parseFloat(num1Input.value);
+                const b = parseFloat(num2Input.value);
+
+                if (isNaN(a) || isNaN(b)) {
+                    resultsDiv.innerHTML = '<p>Please enter valid numbers!</p>';
+                    return;
+                }
+
+                try {
+                    const addition = add(a, b);
+                    const subtraction = subtract(a, b);
+                    const multiplication = multiply(a, b);
+                    const division = b !== 0 ? divide(a, b) : 'Cannot divide by zero';
+
+                    resultsDiv.innerHTML = `
+                        <p>${a} + ${b} = ${addition}</p>
+                        <p>${a} - ${b} = ${subtraction}</p>
+                        <p>${a} × ${b} = ${multiplication}</p>
+                        <p>${a} ÷ ${b} = ${division}</p>
+                    `;
+                } catch (error) {
+                    resultsDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Interactive Calculator</h1>
+    <div>
+        <label for="num1">Number 1: </label>
+        <input type="number" id="num1" />
+    </div>
+    <div>
+        <label for="num2">Number 2: </label>
+        <input type="number" id="num2" />
+    </div>
+    <button id="calculate">Calculate</button>
+    <div id="results"></div>
+</body>
+</html>

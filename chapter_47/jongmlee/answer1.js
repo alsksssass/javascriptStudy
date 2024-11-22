@@ -7,3 +7,21 @@ Chapter 47
 */
 
 // Your solution
+
+class CustomEerror extends Error {
+	constructor(message, code) {
+		super(message);
+		this.name = "CustomError";
+		this.code = code;
+	}
+}
+
+function f() {
+	throw new CustomEerror("custom error occured!!", 404);
+}
+
+try {
+	f();
+} catch (e) {
+	console.log(e.message + "\nerror code is " + e.code);
+}
