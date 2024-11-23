@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .todo-app {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #taskList {
+            list-style: none;
+            padding: 0;
+        }
+        #taskList li {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .task-text {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .task-filters {
+            margin: 20px 0;
+        }
+        .task-stats {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #todoForm {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #taskInput {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+        }
+        .task-filters button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="todolist"></div>
+    <!-- <script src="./src/js/main.js"></script> -->
+	<script src="./dist/js/main.js"></script>
+</body>
+</html>

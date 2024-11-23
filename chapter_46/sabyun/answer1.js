@@ -7,3 +7,17 @@ Chapter 46
 */
 
 // Your solution
+
+function* fivo(){
+	let cur = 1;
+	let pre = 0;
+	while(1){
+		[pre,cur] = [cur, cur + pre];
+		yield cur;
+	}
+}
+const f = fivo();
+console.log(f.next());
+console.log(f.next());
+console.log(f.next());
+console.log(f.next());
