@@ -7,3 +7,11 @@ Chapter 37
 */
 
 // Your solution
+
+function removeDuplicate(arr) {
+	return Array.from(new Set(arr));
+}
+
+const arr = [1, 2, 3, 4, 5, 5, 2, 2, 3, 3, 3, 4, 7, 8, 9, 9, 10, 6];
+console.log(removeDuplicate(arr));
+
