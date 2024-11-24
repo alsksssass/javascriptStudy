@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .display {
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        button:active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button class="btn" data-value="7">7</button>
+            <button class="btn" data-value="8">8</button>
+            <button class="btn" data-value="9">9</button>
+            <button class="btn operator" data-value="+">+</button>
+            <button class="btn" data-value="4">4</button>
+            <button class="btn" data-value="5">5</button>
+            <button class="btn" data-value="6">6</button>
+            <button class="btn operator" data-value="-">-</button>
+            <button class="btn" data-value="1">1</button>
+            <button class="btn" data-value="2">2</button>
+            <button class="btn" data-value="3">3</button>
+            <button class="btn operator" data-value="*">*</button>
+            <button class="btn" data-value="0">0</button>
+            <button class="btn" data-value="C">C</button>
+            <button class="btn" data-value="=">=</button>
+            <button class="btn operator" data-value="/">/</button>
+        </div>
+    </div>
+
+    <script type="module" defer>
+        import { add, sub, mul, div } from './calculator.mjs';
+
+		let currentInput = '';
+		let firstOperand = null;
+		let operator = null;
+
+		// 디스플레이에 값 추가
+		function appendToDisplay(value) {
+			currentInput += value;
+			document.getElementById('display').value = currentInput;
+		}
+
+		// 연산자 설정
+		function setOperation(op) {
+			if (firstOperand === null) {
+				firstOperand = parseFloat(currentInput);
+				currentInput = '';
+				operator = op;
+			}
+		}
+
+		// 계산기 결과 계산
+		function calculateResult() {
+			if (operator && firstOperand !== null && currentInput !== '') {
+				const secondOperand = parseFloat(currentInput);
+				let result;
+
+				try {
+					switch (operator) {
+						case '+':
+							result = add(firstOperand, secondOperand);
+							break;
+						case '-':
+							result = sub(firstOperand, secondOperand);
+							break;
+						case '*':
+							result = mul(firstOperand, secondOperand);
+							break;
+						case '/':
+							result = div(firstOperand, secondOperand);
+							break;
+					}
+
+					// 결과를 디스플레이에 출력
+					document.getElementById('display').value = result;
+					currentInput = result.toString();
+					firstOperand = null;
+					operator = null;
+				} catch (error) {
+					document.getElementById('display').value = error.message;
+				}
+			}
+		}
+
+		// 디스플레이 초기화
+		function clearDisplay() {
+			currentInput = '';
+			firstOperand = null;
+			operator = null;
+			document.getElementById('display').value = '';
+		}
+
+		// 이벤트 리스너를 각 버튼에 등록
+		document.querySelectorAll('.btn').forEach(button => {
+			button.addEventListener('click', function() {
+				const value = button.getAttribute('data-value');
+				if (value === 'C') {
+					clearDisplay();
+				} else if (value === '=') {
+					calculateResult();
+				} else if (['+', '-', '*', '/'].includes(value)) {
+					setOperation(value);
+				} else {
+					appendToDisplay(value);
+				}
+			});
+		});
+    </script>
+</body>
+</html>

@@ -7,3 +7,20 @@ Chapter 46
 */
 
 // Your solution
+function* fiboGenerator() {
+	let [prev, cur] = [0, 1];
+	while (true) {
+		[prev, cur] = [cur, prev + cur];
+		yield cur;
+	}
+}
+
+const fib = fiboGenerator();
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
