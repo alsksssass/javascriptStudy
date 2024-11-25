@@ -1,4 +1,4 @@
-import { calculator } from './calculator.mjs';
+import { checker } from './calculator.mjs';
 // 계산기 버튼 배열 정의
 const buttonValues = [
 	'7', '8', '9', '/',
@@ -47,9 +47,11 @@ function handleButtonClick(value, display) {
 	} else if (value === '=') {
 		// Equal 버튼: 계산 실행
 		try {
-			const { a, o, b } = inputArray;
-			const result = calculator(a,b,o);
-			display.textContent = result;
+			const a = inputArray[0];
+			const b = inputArray[2];
+			const o = inputArray[1];
+			const result = checker(Number(a),Number(b),o);
+			display.textContent = `${result}`;
 			inputArray = [result];
 			console.log('계산 결과:', result);
 			console.log('입력 배열:', inputArray);
