@@ -2,6 +2,7 @@
 // 작성일: 2024-11-23
 
 // DOM이 로드된 후 실행되도록 전체 코드를 감싸기
+import '../css/style.css';
 document.addEventListener('DOMContentLoaded', () => {
     class TodoApp {
         // private 필드 선언
